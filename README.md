@@ -3,7 +3,18 @@
  * ## 비동기 방식으로 Sell과 Buy가 진행된다
 
  * ## Sell
+```python
+ while True:
+  if len(balances)>2: #KRW,거래불가코인 을 제외한 코인이 있다면
+     새롭게 구매된 종목은 check_lst에 넣고
+     check_lst의 종목이 팔렸으면 done_lst에 넣는다
+     if 현재가격이 -1%로 떨어졌다면:
+        바로 시장가 판매
+   
 
+
+
+```
 
 
  * ## Buy
