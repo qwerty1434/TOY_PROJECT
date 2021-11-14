@@ -1,32 +1,32 @@
 # TOY_PROJECT
 * # 코드리뷰
- * ## 비동기 방식으로 Sell과 Buy가 진행된다
+  * ## 비동기 방식으로 Sell과 Buy가 진행된다
 
- * ## Sell
-```python
- while True:
-  if len(balances)>2: #KRW,거래불가코인 을 제외한 코인이 있다면
-     새롭게 구매된 종목은 check_lst에 넣고
-     check_lst의 종목이 팔렸으면 done_lst에 넣는다
-     if 현재가격이 -1%로 떨어졌다면:
-        바로 시장가 판매
-```
+  * ## Sell
+ ```python
+  while True:
+   if len(balances)>2: #KRW,거래불가코인 을 제외한 코인이 있다면
+      새롭게 구매된 종목은 check_lst에 넣고
+      check_lst의 종목이 팔렸으면 done_lst에 넣는다
+      if 현재가격이 -1%로 떨어졌다면:
+         바로 시장가 판매
+ ```
 
 
- * ## Buy
-```python
- while True: #계속 반복됨
-  for i in coin_lst #모든 코인이름을 순회하면서
-     coin = get_ohlcv() #분봉 데이터를 15개 가져온다
-     coin의 BOP,MFI,Sto,RSI를 계산해서 coin의 column으로 추가한 뒤
-     if BOP,MFI,Sto,RSI가 모두 특정 조건을 만족하면:
-        ret = get_order #구매주문을 넣고
-        await asyncio.sleep(15) #15초간 대기한다
-        if int(float(result['remaining_volume'])) != 0 : #구매가 진행되지 않았으면
-           ret = cancel_order(ret['uuid']) #구매주문을 넣어둔 걸 취소한다
-        else:
-           limit_order = sell_limit_order #곧바로 1% 예약주문을 걸어둠
-```   
+  * ## Buy
+ ```python
+  while True: #계속 반복됨
+   for i in coin_lst #모든 코인이름을 순회하면서
+      coin = get_ohlcv() #분봉 데이터를 15개 가져온다
+      coin의 BOP,MFI,Sto,RSI를 계산해서 coin의 column으로 추가한 뒤
+      if BOP,MFI,Sto,RSI가 모두 특정 조건을 만족하면:
+         ret = get_order #구매주문을 넣고
+         await asyncio.sleep(15) #15초간 대기한다
+         if int(float(result['remaining_volume'])) != 0 : #구매가 진행되지 않았으면
+            ret = cancel_order(ret['uuid']) #구매주문을 넣어둔 걸 취소한다
+         else:
+            limit_order = sell_limit_order #곧바로 1% 예약주문을 걸어둠
+ ```   
 
 
 
