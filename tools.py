@@ -19,7 +19,7 @@ def MFI(data,period=14):
     negative_flow = []
     for i in range(1,len(typical_price)):
         if typical_price[i] > typical_price[i-1]:
-            positive_flow.append(money_flow[i])#참고한 링크에서는 여기가 money_flow[i-1]인데 money_flow[i]가 맞겠지? 업비트랑 비슷하게 할려면 money_flow[i]로 하는게 맞음
+            positive_flow.append(money_flow[i])
             negative_flow.append(0)
         elif typical_price[i] < typical_price[i-1]:
             negative_flow.append(money_flow[i])#money_flow[i-1]?
@@ -40,8 +40,6 @@ def MFI(data,period=14):
 
 def Stochastic_Fast_K(data,n=14):
     fast_k = ((data['close'] - data['low'].rolling(n).min()) / (data['high'].rolling(n).max() - data['low'].rolling(n).min()))*100
-    #slow_k = fast_k.rolling(n).mean() #뭘 의미하는지 모르겠음
-    #slow_d = slow_k.rolling(n).mean() #뭘 의미하는지 모르겠음
     return fast_k
 
 def RSI(data,period= 14):
