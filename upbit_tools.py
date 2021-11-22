@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Nov  6 17:33:31 2021
-
-@author: 82104
-"""
 
 import pyupbit
 
@@ -23,7 +17,7 @@ def asset():
             asset +=float(i['balance']) 
             #asset +=float(i['locked'])
         else:
-            asset +=float(max(i['balance'],i['locked'])) * float(i['avg_buy_price'])#현재가격이 아니라 구매가격이라 좀 차이가 남
+            asset +=float(max(i['balance'],i['locked'])) * float(i['avg_buy_price'])
     return asset
 
 
