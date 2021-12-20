@@ -67,5 +67,7 @@
     * 직접 구매한 데이터를 2차 분석해 이를 가공할 예정
     * rsi가 상승하는 시그널을 보고 사면 괜찮을까?
 
-* 시간대가 유의미한가?
-![plot](https://user-images.githubusercontent.com/25142537/146708482-4e8df788-68dd-42dd-904c-75b8ad3ad206.png)
+
+
+  * ## 시간대가 유의미한가?
+![plot](https://user-images.githubusercontent.com/25142537/146708631-dcfaa313-782c-4b12-bca8-776758eddb66.png)
