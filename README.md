@@ -71,3 +71,6 @@
 
   * ## 시간대가 유의미한가?
 ![plot](https://user-images.githubusercontent.com/25142537/146708631-dcfaa313-782c-4b12-bca8-776758eddb66.png)
+
+    * 시간대가 유의미 하다면 뭐 때문에 그런걸까?
+      * 우선 9시는 확실히 유의미하다
