@@ -70,7 +70,7 @@
 
 
   * ## 시간대가 유의미한가?
-![plot](https://user-images.githubusercontent.com/25142537/146708631-dcfaa313-782c-4b12-bca8-776758eddb66.png)
+![Figure 2022-01-01 172624](https://user-images.githubusercontent.com/25142537/147846886-ea0c8e9d-11d8-4215-9a61-587f3a3bbef4.png)
 
    * 시간대가 유의미 하다면 뭐 때문에 그런걸까?
      * 우선 9시는 확실히 유의미하다
