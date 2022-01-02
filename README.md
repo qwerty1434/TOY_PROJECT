@@ -28,7 +28,11 @@
                limit_order = sell_limit_order #곧바로 1% 예약주문을 걸어둠
     ```   
 
-
+   * ## Upbit_tools.py
+     * asset(): 현재 보유 자산을 return 합니다
+     * one_tick(price): 가격대별로 한 틱의 가격이 얼마인지 계산합니다
+     * market_status(): '전일대비 가격이 상승한 종목의 개수 - 전일대비 가격이 하락한 종목의 개수'를 return 합니다 
+     * sell_price(current_price,buy_price,under_k): 현재가격을 기준으로 1%의 수익을 내는 거래가능 가격을 return 합니다
 
 * # 생각 정리
   * ## 주식이 아닌 가상화폐를 선택한 이유 
