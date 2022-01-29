@@ -73,8 +73,18 @@
 
 
 
-  * ## 시간대가 유의미한가?
-![Figure 2022-01-01 172624](https://user-images.githubusercontent.com/25142537/147846886-ea0c8e9d-11d8-4215-9a61-587f3a3bbef4.png)
+  * ## Result
+### 1120-1231
+![1120-1231_25분단위](https://user-images.githubusercontent.com/25142537/151659656-bb496572-08c6-4186-a013-bf660435dc5e.png)
+
+### 0101-0129
+![0101-0129_25분단위](https://user-images.githubusercontent.com/25142537/151659658-c31c9607-04ed-43e8-b4a1-fac63c563500.png)
+
+### 1120-0129
+![1120-0129_25분단위](https://user-images.githubusercontent.com/25142537/151659666-893a0690-083b-487f-b72b-5e7ea7881f87.png)
+
+
+
 
    * 시간대가 유의미 하다면 뭐 때문에 그런걸까?
      * 사람들의 일정한 루틴에 의해? (ex- 출근할 때 확인한다, 점심시간에 확인한다 등)
