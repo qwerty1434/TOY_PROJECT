@@ -2,7 +2,7 @@
 import pyupbit
 
 def asset():
-    txt = 'C:/Users/82104/Desktop/upbit아이디비밀번호.txt'
+    txt = '/upbit아이디비밀번호.txt'
     f = open(txt, 'r')
     lines = f.readlines()
     f.close()
