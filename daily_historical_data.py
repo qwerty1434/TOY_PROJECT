@@ -30,7 +30,7 @@ mth = yesterday.month
 dy = yesterday.day
 dir_name = str(yr)+str("-")+str(mth)+str("-")+str(dy)
 
-path = f"C:/Users/82104/Desktop/1분봉_매일데이터/{dir_name}"
+path = f"/1분봉_매일데이터/{dir_name}"
 
 
 
@@ -53,7 +53,7 @@ for coin in coin_list:
 all_files = glob.glob(os.path.join(path, "*.csv"))
 df_from_each_file = (pd.read_csv(f, sep=',') for f in all_files)
 df_merged   = pd.concat(df_from_each_file, ignore_index=True)
-df_merged.to_csv( f"C:/Users/82104/Desktop/1분봉_매일데이터/{dir_name}_merged.csv")
+df_merged.to_csv( f"/1분봉_매일데이터/{dir_name}_merged.csv")
 
 
 #왜 데이터가 다 없지? 9시부터 1440개 가져오는데 중간에 없는 데이터가 있어서 이전날9시보다 더 이전 데이터까지 들어오게 되네
