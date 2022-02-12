@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 
 
 #로그인
-txt = 'C:/Users/82104/Desktop/upbit아이디비밀번호.txt'
+txt = 'upbit아이디비밀번호.txt'
 f = open(txt, 'r')
 lines = f.readlines()
 f.close()
