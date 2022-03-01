@@ -83,7 +83,8 @@
 ### 1120-0129
 ![1120-0129_25분단위](https://user-images.githubusercontent.com/25142537/151659666-893a0690-083b-487f-b72b-5e7ea7881f87.png)
 
-
+### 2월
+![2월 거래결과](https://user-images.githubusercontent.com/25142537/156164472-420a9f59-81ea-4055-a1ec-2ca13c386b88.png)
 
 
    * 시간대가 유의미 하다면 뭐 때문에 그런걸까?
