@@ -74,14 +74,11 @@
 
 
   * ## Result
-### 1120-1231
+### 21년
 ![1120-1231_25분단위](https://user-images.githubusercontent.com/25142537/151659656-bb496572-08c6-4186-a013-bf660435dc5e.png)
 
-### 0101-0129
+### 1월
 ![0101-0129_25분단위](https://user-images.githubusercontent.com/25142537/151659658-c31c9607-04ed-43e8-b4a1-fac63c563500.png)
-
-### 1120-0129
-![1120-0129_25분단위](https://user-images.githubusercontent.com/25142537/151659666-893a0690-083b-487f-b72b-5e7ea7881f87.png)
 
 ### 2월
 ![2월 거래결과](https://user-images.githubusercontent.com/25142537/156164472-420a9f59-81ea-4055-a1ec-2ca13c386b88.png)
