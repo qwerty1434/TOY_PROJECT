@@ -76,58 +76,59 @@ async def buy():
         if float(q[0]['balance'])<10000:
             print("현금이 부족합니다")
             await asyncio.sleep(600)
-        else:
-            for i in coin_list:
-                coin = pyupbit.get_ohlcv(i,interval ='minute1',count=16)#count를 너무 적게하면 rsi를 구할수가 없다
-                if coin is None:
+            continue
+            
+        for i in coin_list:
+            coin = pyupbit.get_ohlcv(i,interval ='minute1',count=16)#count를 너무 적게하면 rsi를 구할수가 없다
+            if coin is None:
+                continue
+
+            #서로간의 관계를 바탕으로 한 추가적인 계산을 염두해 데이터 column에 추가하는 방식 활용              
+            coin['BOP'] = BOP(coin)
+            coin['MFI'] = MFI(coin)
+            coin['Sto'] = Stochastic_Fast_K(coin)
+            coin['RSI'] = RSI(coin)
+
+            if coin.iloc[-1]['BOP'] >=1 and coin.iloc[-1]['MFI'] < 20 and coin.iloc[-1]['Sto'] <20 and coin.iloc[-1]['RSI'] <30 and coin.iloc[-2]['RSI'] < coin.iloc[-1]['RSI']:
+                print(i+'는 '+str(coin['close'][-1]) +'원을 기준으로 과매도 상태이며 현재 가격은 ' + str(pyupbit.get_current_price(i)) +'원, 1분 전 저점은'+ str(coin['low'][-1]))
+
+                price = float(pyupbit.get_current_price(i)) #현재가격으로 구매 시도
+
+
+                count = (today_buy_price)/price #price * count = today_buy_price, today_buy_price만큼 구매하기 위한 count개수
+
+                if test_token:
+                    ret = upbit.buy_market_order(i, today_buy_price)#시장가 구매
+                else:
+                    ret = upbit.buy_limit_order(i,price,count)#종목,가격,개수 // 지정가 구매
+
+                print(i+"코인을 "+str(price)+'가격에 '+str(count)+"개 구입 시도")        
+
+                #해당종목 주문을 걸어두고 15초간 대기 -> 15초안에 구매안되면 취소
+                await asyncio.sleep(15)
+                print(ret)
+
+                if 'error' in ret.keys():
+                    print("에러발생: "+ret)
                     continue
-                
-                #서로간의 관계를 바탕으로 한 추가적인 계산을 염두해 데이터 column에 추가하는 방식 활용              
-                coin['BOP'] = BOP(coin)
-                coin['MFI'] = MFI(coin)
-                coin['Sto'] = Stochastic_Fast_K(coin)
-                coin['RSI'] = RSI(coin)
-                
-                if coin.iloc[-1]['BOP'] >=1 and coin.iloc[-1]['MFI'] < 20 and coin.iloc[-1]['Sto'] <20 and coin.iloc[-1]['RSI'] <30 and coin.iloc[-2]['RSI'] < coin.iloc[-1]['RSI']:
-                    print(i+'는 '+str(coin['close'][-1]) +'원을 기준으로 과매도 상태이며 현재 가격은 ' + str(pyupbit.get_current_price(i)) +'원, 1분 전 저점은'+ str(coin['low'][-1]))
-                    
-                    price = float(pyupbit.get_current_price(i)) #현재가격으로 구매 시도
-                    
-                    
-                    count = (today_buy_price)/price #price * count = today_buy_price, today_buy_price만큼 구매하기 위한 count개수
-                        
-                    if test_token:
-                        ret = upbit.buy_market_order(i, today_buy_price)#시장가 구매
-                    else:
-                        ret = upbit.buy_limit_order(i,price,count)#종목,가격,개수 // 지정가 구매
-                    
-                    print(i+"코인을 "+str(price)+'가격에 '+str(count)+"개 구입 시도")        
-                    
-                    #해당종목 주문을 걸어두고 15초간 대기 -> 15초안에 구매안되면 취소
-                    await asyncio.sleep(15)
-                    print(ret)
-                    
-                    if 'error' in ret.keys():
-                        print("에러발생: "+ret)
-                        continue
-                    
-                    result = upbit.get_order(ret['uuid']) # 구매결과를 담은 변수
 
-                    #지정가
-                    if result['ord_type'] == 'limit':
-                        if int(float(result['remaining_volume'])) != 0 : # 하나도 구매하지 못한 경우
-                            print("구매취소")
-                            ret = upbit.cancel_order(ret['uuid'])
-                        else: # 일부 또는 전체 구매 성공
-                            print("구매성공(지정가)")
-                            #구매와 동시에 1% 지정가 주문 걸어두기
-                            limit_order = upbit.sell_limit_order(result['market'],sell_price(float(result['price'])*1.01,float(result['price']),1.01),result['volume'])
-                    #시장가
-                    else: #시장가는 반드시 구매가 성공하기 때문에 ifelse로 체크할 필요 없음
-                        print("구매성공(시장가)")
-                        limit_order = upbit.sell_limit_order(result['market'],sell_price(float(result['trades'][0]['price'])*1.01,float(result['trades'][0]['price']),1.01),result['executed_volume'])
+                result = upbit.get_order(ret['uuid']) # 구매결과를 담은 변수
 
-        await asyncio.sleep(10) #여기서 10초자는 이유가 뭐임? 그 비동기처리할때 반드시 잠을 자야하는건가?
+                #지정가
+                if result['ord_type'] == 'limit':
+                    if int(float(result['remaining_volume'])) != 0 : # 하나도 구매하지 못한 경우
+                        print("구매취소")
+                        ret = upbit.cancel_order(ret['uuid'])
+                    else: # 일부 또는 전체 구매 성공
+                        print("구매성공(지정가)")
+                        #구매와 동시에 1% 지정가 주문 걸어두기
+                        limit_order = upbit.sell_limit_order(result['market'],sell_price(float(result['price'])*1.01,float(result['price']),1.01),result['volume'])
+                #시장가
+                else: #시장가는 반드시 구매가 성공하기 때문에 ifelse로 체크할 필요 없음
+                    print("구매성공(시장가)")
+                    limit_order = upbit.sell_limit_order(result['market'],sell_price(float(result['trades'][0]['price'])*1.01,float(result['trades'][0]['price']),1.01),result['executed_volume'])
+
+        await asyncio.sleep(10)
         
         if life[-1] < life[-2] < life[-3] <life[-4]: #3번연속 거래에 실패하면 더 이상 당일은 거래하지 않음     
             a = asset()
