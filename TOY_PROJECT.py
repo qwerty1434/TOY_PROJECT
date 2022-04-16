@@ -89,7 +89,7 @@ async def buy():
             coin['Sto'] = Stochastic_Fast_K(coin)
             coin['RSI'] = RSI(coin)
 
-            if coin.iloc[-1]['BOP'] >=1 and coin.iloc[-1]['MFI'] < 20 and coin.iloc[-1]['Sto'] <20 and coin.iloc[-1]['RSI'] <30 and coin.iloc[-2]['RSI'] < coin.iloc[-1]['RSI']:
+            if coin.iloc[-1]['BOP'] >=1 and coin.iloc[-1]['MFI'] < 20 and coin.iloc[-1]['RSI'] <30 :
                 print(i+'는 '+str(coin['close'][-1]) +'원을 기준으로 과매도 상태이며 현재 가격은 ' + str(pyupbit.get_current_price(i)) +'원, 1분 전 저점은'+ str(coin['low'][-1]))
 
                 price = float(pyupbit.get_current_price(i)) # 현재가격으로 구매 시도
