@@ -121,7 +121,8 @@ async def buy():
                         ret = upbit.cancel_order(ret['uuid'])
                     else: # 일부 또는 전체 구매 성공
                         print("구매성공(지정가)")
-                        # limit_order = upbit.sell_limit_order(result['market'],sell_price(float(result['price'])*1.01,float(result['price']),1.01),result['volume'])
+                        #구매와 동시에 1% 지정가 주문을 겁니다
+                        limit_order = upbit.sell_limit_order(result['market'],sell_price(float(result['price'])*1.01,float(result['price']),1.01),result['volume'])
                 # 시장가
                 else: #시장가는 반드시 구매가 성공하기 때문에 ifelse로 체크할 필요 없음
                     print("구매성공(시장가)")
