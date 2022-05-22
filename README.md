@@ -118,6 +118,11 @@
 ### 3월 거래결과
 ![3월](https://user-images.githubusercontent.com/25142537/161555858-00f82bf5-5a16-4ccf-91da-7888ddb15291.png)
 
+### 4월 거래결과
+
+![4월](https://user-images.githubusercontent.com/25142537/169680792-8165f7cf-b0f9-4508-88a8-1f9201a32351.png)
+
+
 
 
 ## problems
