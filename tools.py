@@ -26,7 +26,8 @@ def MFI(data,period=14):
     for i in range(period-1,len(positive_flow)):
         positive_mf.append(sum(positive_flow[i+1-period : i+1]))
     for i in range(period-1,len(negative_flow)):
-        negative_mf.append(sum(negative_flow[i+1-period : i+1]))
+        num = sum(negative_flow[i+1-period : i+1])        
+        negative_mf.append(0.0001 if num==0 else num)
     #mfi = 100 * np.array(positive_mf) / (np.array(positive_mf) + np.array(negative_mf))
     mfi = 100 - 100 / (1 +  (np.array(positive_mf)/np.array(negative_mf)))
     return [float('Nan')]*period+list(mfi)
