@@ -153,7 +153,7 @@ async def buy():
                         print("구매성공(시장가)")
                         limit_order = upbit.sell_limit_order(result['market'],sell_price(float(result['trades'][0]['price'])*1.01,float(result['trades'][0]['price']),1.01),result['executed_volume'])
 
-        await asyncio.sleep(10) #여기서 10초자는 이유가 뭐임? 그 비동기처리할때 반드시 잠을 자야하는건가?
+        await asyncio.sleep(10)
         
         if life[-1] < life[-2] < life[-3] <life[-4]: #3번연속 거래에 실패하면 더 이상 당일은 거래하지 않음     
             a = asset()
@@ -180,7 +180,6 @@ def sell_process(revenue=1.01):
     
 
     try: #새롭게 limit_order가 들어온 경우, limit_order가 없을 수 있기 대문에 try-catch
-        # check_list에도 없고 done_list에도 없다 -> 방금 막 구매한 종목이구나 -> check_list에 넣자 // 왜 구매시점에 안넣고 지금 넣냐 -> 프로그램이 종료되었다 다시 실행할 때를 대비        
         if limit_order['uuid'] not in check_list and limit_order['uuid'] not in done_list:
             check_list.append(limit_order['uuid'])
     except:
@@ -252,13 +251,13 @@ def sell_process(revenue=1.01):
             ret = upbit.get_order("KRW-"+i['currency'])
             created_at = ret[0]['created_at']
             if ret:
-                upbit.cancel_order(ret[0]['uuid'])  #이전주문 취소
+                upbit.cancel_order(ret[0]['uuid']) #이전주문 취소
                 check_list.remove(ret[0]['uuid'])
                 done_list.append(ret[0]['uuid'])                    
         except:
             pass
         
-        ret = upbit.sell_market_order('KRW-'+i['currency'],i['balance'])#시장가로 판매            
+        ret = upbit.sell_market_order('KRW-'+i['currency'],i['balance']) #시장가로 판매            
         
         if 'error' in ret.keys():
             print(ret)
@@ -287,7 +286,7 @@ def sell_process(revenue=1.01):
 async def sell():
     global token_type
     while True:
-        if len(upbit.get_balances()) > 2: # 판매할 종목이 존재할 때만 실행
+        if len(upbit.get_balances()) > 2: #판매할 종목이 존재할 때만 실행
             sell_process()        
         await asyncio.sleep(2)
         
