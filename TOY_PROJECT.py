@@ -39,7 +39,7 @@ coin_list = pyupbit.get_tickers(fiat="KRW")#시장에서 거래되는 코인의 
 done_list = []
 check_list = []
 
-q = upbit.get_balances() #ip가 바껴서 q가 비게되는 경우도 존재 -> 업비트 사이트에서 openapi 허용주소를 바꿔줘서 문제 해결
+q = upbit.get_balances()
 
 
 for i in q[1:]:
